@@ -11,8 +11,8 @@
 const photos = [
   {
     src: "{css,js,images}/valeimg1.png",
-    caption: "Abgie — 2024",
-    alt: "Sofía sonriendo"
+    caption: "Angie — 2024",
+    alt: "Angie sonriendo"
   },
   {
     src: "{css,js,images}/valeimg1.png",
@@ -32,7 +32,7 @@ const photos = [
   {
     src: "{css,js,images}/valeimg1.png",
     caption: "Siempre sonriendo",
-    alt: "Sofía de perfil"
+    alt: "Angie de perfil"
   },
   {
     src: "{css,js,images}/valeimg1.png",
