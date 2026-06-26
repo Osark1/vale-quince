@@ -10,22 +10,22 @@
  */
 const photos = [
   {
-    src: "{css,js,images}/valeimg1.png",
+    src: "css,js,images/valeimg1.png",
     caption: "Angie — 2024",
     alt: "Angie sonriendo"
   },
   {
-    src: "{css,js,images}/valeimg1.png",
+    src: "css,js,images/valeimg1.png",
     caption: "Familia unida",
     alt: "Foto familiar"
   },
   {
-    src: "{css,js,images}/valeimg1.png",
+    src: "css,js,images/valeimg1.png",
     caption: "Recuerdos",
     alt: "Flores azules"
   },
   {
-    src: "{css,js,images}/valeimg1.png",
+    src: "css,js,images/valeimg1.png",
     caption: "Cumpleaños 10",
     alt: "Pastel de cumpleaños"
   },
