@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XV Años — Valentina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Cormorant+Garant:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ✦ Canvas de partículas ✦ -->
+  <canvas id="starfield"></canvas>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="inicio">
+    <div class="hero__crown">✦ XV ✦</div>
+    <p class="hero__eyebrow">Con amor y alegría, te invitamos a celebrar</p>
+    <h1 class="hero__name">Angie<br><em>Valentina</em></h1>
+    <p class="hero__date-label">Sus quince años</p>
+    <div class="hero__divider">
+      <span></span><span class="hero__diamond">◆</span><span></span>
+    </div>
+    <p class="hero__event-info">
+      Sábado, 18 de julio de 2026 &nbsp;·&nbsp; 7:00 p.m.<br>
+      <span class="hero__venue">Salón Palacio Azul — Bogotá</span>
+    </p>
+    <a href="#confirmar" class="btn btn--primary">Confirmar asistencia</a>
+  </section>
+
+  <!-- ===== CUENTA REGRESIVA ===== -->
+  <section class="countdown-section" id="cuenta">
+    <p class="section-eyebrow">Faltan solo</p>
+    <div class="countdown" id="countdown">
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-days">--</span>
+        <span class="countdown__label">Días</span>
+      </div>
+      <span class="countdown__sep">:</span>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-hours">--</span>
+        <span class="countdown__label">Horas</span>
+      </div>
+      <span class="countdown__sep">:</span>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-minutes">--</span>
+        <span class="countdown__label">Minutos</span>
+      </div>
+      <span class="countdown__sep">:</span>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-seconds">--</span>
+        <span class="countdown__label">Segundos</span>
+      </div>
+    </div>
+    <p class="countdown__subtitle">para una noche que no olvidarás</p>
+  </section>
+
+  <!-- ===== GALERÍA ===== -->
+  <section class="gallery-section" id="galeria">
+    <p class="section-eyebrow">Momentos</p>
+    <h2 class="section-title">Nuestra quinceañera</h2>
+    <div class="gallery" id="gallery">
+      <!-- Las fotos se insertan desde gallery-data.js -->
+    </div>
+    <p class="gallery__hint">Haz clic en una foto para verla completa</p>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista de foto">
+      <button class="lightbox__close" id="lb-close" aria-label="Cerrar">✕</button>
+      <button class="lightbox__nav lightbox__nav--prev" id="lb-prev" aria-label="Anterior">‹</button>
+      <img class="lightbox__img" id="lb-img" src="" alt="" />
+      <button class="lightbox__nav lightbox__nav--next" id="lb-next" aria-label="Siguiente">›</button>
+    </div>
+  </section>
+
+  <!-- ===== DETALLES DEL EVENTO ===== -->
+  <section class="details-section" id="detalles">
+    <p class="section-eyebrow">El gran día</p>
+    <h2 class="section-title">Detalles del evento</h2>
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="detail-card__icon">📅</div>
+        <h3>Fecha</h3>
+        <p>Sábado<br>19 de julio de 2025</p>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card__icon">🕖</div>
+        <h3>Hora</h3>
+        <p>Recepción 7:00 p.m.<br>Cena 8:30 p.m.</p>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card__icon">📍</div>
+        <h3>Lugar</h3>
+        <p>Salón Palacio Azul<br>Calle 100 #15-20, Bogotá</p>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card__icon">👗</div>
+        <h3>Vestimenta</h3>
+        <p>Formal<br>Tonos azul y dorado</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORMULARIO RSVP ===== -->
+  <section class="rsvp-section" id="confirmar">
+    <div class="rsvp-inner">
+      <p class="section-eyebrow">Te esperamos</p>
+      <h2 class="section-title">Confirma tu asistencia</h2>
+      <p class="rsvp-intro">
+        Tu presencia es el mejor regalo. Por favor completa los datos antes del <strong>5 de julio</strong>.
+      </p>
+
+      <div id="rsvp-success" class="rsvp-success hidden">
+        <div class="rsvp-success__icon">✦</div>
+        <h3>¡Gracias, <span id="success-name"></span>!</h3>
+        <p>Tu confirmación ha sido recibida. ¡Nos vemos en la fiesta!</p>
+      </div>
+
+      <form class="rsvp-form" id="rsvp-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">Nombre completo <span aria-hidden="true">*</span></label>
+            <input type="text" id="f-name" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="f-phone">Teléfono / WhatsApp <span aria-hidden="true">*</span></label>
+            <input type="tel" id="f-phone" name="telefono" placeholder="+57 300 000 0000" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="f-email">Correo electrónico <span aria-hidden="true">*</span></label>
+          <input type="email" id="f-email" name="email" placeholder="tucorreo@ejemplo.com" required />
+        </div>
+        <div class="form-group">
+          <label for="f-guests">¿Cuántas personas asistirán contigo? <span aria-hidden="true">*</span></label>
+          <div class="guest-selector" id="guest-selector">
+            <button type="button" class="guest-btn" data-val="1">Solo yo</button>
+            <button type="button" class="guest-btn" data-val="2">2 personas</button>
+            <button type="button" class="guest-btn" data-val="3">3 personas</button>
+            <button type="button" class="guest-btn" data-val="4">4 personas</button>
+            <button type="button" class="guest-btn" data-val="5+">5 o más</button>
+          </div>
+          <input type="hidden" id="f-guests" name="asistentes" required />
+        </div>
+        <div class="form-group">
+          <label for="f-message">¿Algún mensaje para Sofía? <span class="optional">(opcional)</span></label>
+          <textarea id="f-message" name="mensaje" rows="3" placeholder="Escríbele un deseo especial..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full" id="rsvp-submit">
+          <span class="btn-text">Confirmar mi asistencia</span>
+          <span class="btn-loader hidden">Enviando…</span>
+        </button>
+        <p class="form-note">* Campos obligatorios</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer__crown">✦ XV ✦</div>
+    <p class="footer__name">Sofía Valentina</p>
+    <p class="footer__tagline">19 · julio · 2025</p>
+    <p class="footer__love">Hecho con amor por su familia</p>
+  </footer>
+
+  <script src="js/starfield.js"></script>
+  <script src="js/gallery-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

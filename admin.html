@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Invitaciones — XV Sofía</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:       #06091E;
+      --navy-mid:   #0D1433;
+      --blue-deep:  #1A2B6B;
+      --blue-royal: #2563EB;
+      --gold:       #C9A84C;
+      --gold-light: #E8D5A3;
+      --gold-dim:   #8B6E2E;
+      --pearl:      #F0EEF8;
+      --pearl-dim:  #C4C0D8;
+      --green:      #22C55E;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--navy);
+      color: var(--pearl);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, var(--navy-mid), var(--blue-deep));
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .header__crown { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.2em; }
+    .header__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--pearl);
+    }
+    .header__sub {
+      font-size: 0.7rem;
+      color: var(--pearl-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .header__back {
+      margin-left: auto;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    .header__back:hover { background: rgba(201,168,76,0.1); }
+
+    /* ── Layout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (max-width: 800px) { .layout { grid-template-columns: 1fr; } }
+
+    /* ── Cards ── */
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+    .card__title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* ── Form controls ── */
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius);
+      padding: 0.75rem 0.9rem;
+      color: var(--pearl);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { border-color: var(--gold); }
+    .field select option { background: var(--navy-mid); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.5rem;
+      border-radius: 100px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
+    .btn--gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      color: var(--navy);
+    }
+    .btn--gold:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn--wa {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+    }
+    .btn--wa:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn--email {
+      background: linear-gradient(135deg, var(--blue-royal), var(--blue-deep));
+      color: #fff;
+    }
+    .btn--email:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn--sm { padding: 0.5rem 0.9rem; font-size: 0.62rem; }
+    .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+    /* ── Preview ── */
+    .preview {
+      background: rgba(37,99,235,0.07);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: var(--radius);
+      padding: 1rem;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--pearl-dim);
+      min-height: 100px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .preview strong { color: var(--pearl); }
+
+    /* ── Guest list ── */
+    .guest-list {
+      margin-top: 0.5rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .guest-list::-webkit-scrollbar { width: 4px; }
+    .guest-list::-webkit-scrollbar-track { background: transparent; }
+    .guest-list::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 4px; }
+
+    .guest-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto auto;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.78rem;
+    }
+    .guest-row:last-child { border-bottom: none; }
+    .guest-row .name { color: var(--pearl); font-weight: 500; }
+    .guest-row .contact { color: var(--pearl-dim); font-size: 0.7rem; }
+    .guest-row .status {
+      font-size: 0.6rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+    .status--pending  { background: rgba(201,168,76,0.15); color: var(--gold); }
+    .status--sent     { background: rgba(37,99,235,0.2);   color: #93C5FD; }
+    .status--confirmed{ background: rgba(34,197,94,0.15);  color: var(--green); }
+
+    /* ── RSVPs panel ── */
+    .rsvp-entry {
+      padding: 0.9rem;
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+      background: rgba(255,255,255,0.02);
+    }
+    .rsvp-entry__name {
+      font-weight: 600;
+      color: var(--pearl);
+      margin-bottom: 0.25rem;
+    }
+    .rsvp-entry__detail {
+      font-size: 0.72rem;
+      color: var(--pearl-dim);
+      line-height: 1.6;
+    }
+    .rsvp-entry__badge {
+      display: inline-block;
+      background: rgba(34,197,94,0.15);
+      color: var(--green);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      margin-left: 0.5rem;
+    }
+    .empty { color: var(--pearl-dim); font-style: italic; font-size: 0.8rem; text-align: center; padding: 2rem; }
+
+    /* ── URL builder ── */
+    .url-box {
+      background: rgba(37,99,235,0.07);
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      color: var(--blue-mist, #93C5FD);
+      word-break: break-all;
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      position: relative;
+    }
+    .copy-tip {
+      position: absolute;
+      right: 0.5rem; top: 50%; transform: translateY(-50%);
+      font-size: 0.6rem;
+      color: var(--gold);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .url-box:hover .copy-tip { opacity: 1; }
+
+    .tab-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .tab {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pearl-dim);
+      padding: 0.6rem 1.1rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .col-span-2 { grid-column: span 2; }
+    @media (max-width: 800px) { .col-span-2 { grid-column: span 1; } }
+
+    .stats-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .stat {
+      flex: 1;
+      min-width: 100px;
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--pearl);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stat__label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header__crown">✦ XV ✦</div>
+    <div class="header__title">Panel de Invitaciones</div>
+    <div class="header__sub">Sofía Valentina · 19 julio 2025</div>
+  </div>
+  <a href="index.html" class="header__back">← Ver invitación</a>
+</div>
+
+<div class="layout">
+
+  <!-- ── Columna izquierda: Composer ── -->
+  <div>
+    <!-- Estadísticas -->
+    <div class="stats-row" id="stats-row">
+      <div class="stat"><div class="stat__num" id="stat-guests">0</div><div class="stat__label">Invitados</div></div>
+      <div class="stat"><div class="stat__num" id="stat-sent">0</div><div class="stat__label">Enviadas</div></div>
+      <div class="stat"><div class="stat__num" id="stat-confirmed">0</div><div class="stat__label">Confirmados</div></div>
+      <div class="stat"><div class="stat__num" id="stat-total">0</div><div class="stat__label">Asistentes</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card__title">✉ Crear invitación personalizada</div>
+
+      <div class="tab-row">
+        <div class="tab active" data-tab="compose">Redactar</div>
+        <div class="tab" data-tab="preview">Vista previa</div>
+        <div class="tab" data-tab="url">Link personalizado</div>
+      </div>
+
+      <div class="tab-panel active" id="tab-compose">
+        <div class="field">
+          <label>Nombre del invitado *</label>
+          <input type="text" id="inv-name" placeholder="Ej: María García" />
+        </div>
+        <div class="field">
+          <label>WhatsApp (con código de país)</label>
+          <input type="tel" id="inv-phone" placeholder="+57 300 123 4567" />
+        </div>
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" id="inv-email" placeholder="maria@ejemplo.com" />
+        </div>
+        <div class="field">
+          <label>Relación con la quinceañera</label>
+          <select id="inv-relation">
+            <option value="">Selecciona...</option>
+            <option>Amiga del colegio</option>
+            <option>Familia</option>
+            <option>Amiga de la infancia</option>
+            <option>Compañera de baile</option>
+            <option>Vecina</option>
+            <option>Otra</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Mensaje personalizado (opcional)</label>
+          <textarea id="inv-custom" rows="2" placeholder="Añade un mensaje especial para esta persona..."></textarea>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn--gold" onclick="addGuest()">+ Agregar a la lista</button>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-preview">
+        <p style="font-size:0.65rem;color:var(--pearl-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;">WhatsApp</p>
+        <div class="preview" id="preview-wa"></div>
+        <p style="font-size:0.65rem;color:var(--pearl-dim);letter-spacing:0.1em;text-transform:uppercase;margin:1rem 0 0.75rem;">Asunto del correo</p>
+        <div class="preview" id="preview-email-subj" style="font-size:0.8rem;padding:0.5rem 1rem;"></div>
+        <p style="font-size:0.65rem;color:var(--pearl-dim);letter-spacing:0.1em;text-transform:uppercase;margin:0.75rem 0 0.5rem;">Cuerpo del correo</p>
+        <div class="preview" id="preview-email-body"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-url">
+        <p style="font-size:0.78rem;color:var(--pearl-dim);margin-bottom:1rem;">
+          Cada invitado recibe un link único que lo lleva directo a la página con su nombre prellenado en el formulario de confirmación.
+        </p>
+        <div class="url-box" id="url-display" onclick="copyUrl(this)">
+          <span id="url-text">— Ingresa un nombre primero —</span>
+          <span class="copy-tip">Copiar</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn--sm btn--gold" onclick="copyUrl(document.getElementById('url-display'))">Copiar link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Columna derecha: Lista de invitados ── -->
+  <div>
+    <div class="card" style="margin-bottom:1.5rem;">
+      <div class="card__title">👥 Lista de invitados</div>
+
+      <div class="btn-row" style="margin-bottom:1rem;">
+        <button class="btn btn--sm btn--gold" onclick="sendAllWhatsApp()">📲 Enviar todo por WhatsApp</button>
+        <button class="btn btn--sm" style="border:1px solid rgba(201,168,76,0.3);color:var(--gold);" onclick="exportList()">⬇ Exportar CSV</button>
+      </div>
+
+      <div class="guest-list" id="guest-list">
+        <p class="empty">Aún no hay invitados. Agrega el primero →</p>
+      </div>
+    </div>
+
+    <!-- RSVPs recibidos -->
+    <div class="card">
+      <div class="card__title">✅ Confirmaciones recibidas</div>
+      <div id="rsvp-list"><p class="empty">Aún no hay confirmaciones.</p></div>
+      <div class="btn-row" style="margin-top:0.75rem;">
+        <button class="btn btn--sm btn--gold" onclick="loadRSVPs()">🔄 Actualizar</button>
+        <button class="btn btn--sm" style="border:1px solid rgba(201,168,76,0.3);color:var(--gold);" onclick="exportRSVPs()">⬇ Exportar CSV</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ══════ CONFIG ══════ */
+const BASE_URL    = window.location.origin + window.location.pathname.replace('admin.html','') + 'index.html';
+const PARTY_DATE  = '19 de julio de 2025';
+const PARTY_TIME  = '7:00 p.m.';
+const PARTY_VENUE = 'Salón Palacio Azul, Bogotá';
+const QUINCE_NAME = 'Sofía Valentina';
+
+/* ══════ STATE ══════ */
+let guests = JSON.parse(localStorage.getItem('admin_guests') || '[]');
+
+/* ══════ TABS ══════ */
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const group = tab.closest('.card');
+    group.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    group.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    if (tab.dataset.tab === 'preview') updatePreviews();
+    if (tab.dataset.tab === 'url') updateUrl();
+  });
+});
+
+/* ══════ MESSAGES ══════ */
+function getName()   { return (document.getElementById('inv-name').value.trim() || 'Invitado/a').split(' ')[0]; }
+function getCustom() { return document.getElementById('inv-custom').value.trim(); }
+
+function buildWhatsApp(name, custom) {
+  const extra = custom ? `\n\n💌 ${custom}` : '';
+  return `✨ *¡Hola ${name}!* ✨
+
+Con mucha ilusión, te invitamos a celebrar los *XV años de ${QUINCE_NAME}* 💙
+
+📅 *Fecha:* ${PARTY_DATE}
+🕖 *Hora:* ${PARTY_TIME}
+📍 *Lugar:* ${PARTY_VENUE}
+👗 *Vestimenta:* Formal (tonos azul y dorado)${extra}
+
+🔗 Confirma tu asistencia aquí:
+${buildLink(name)}
+
+¡Será una noche mágica que no querrás perderte! ✦`;
+}
+
+function buildEmailSubj(name) {
+  return `💙 Estás invitado/a a los XV de ${QUINCE_NAME} — ${name}`;
+}
+
+function buildEmailBody(name, custom) {
+  const extra = custom ? `\n\n${custom}\n` : '';
+  return `Estimado/a ${name},\n\nEs con gran alegría que te invitamos a celebrar los quince años de ${QUINCE_NAME}.\n\n📅 Fecha: ${PARTY_DATE}\n🕖 Hora: ${PARTY_TIME}\n📍 Lugar: ${PARTY_VENUE}\n👗 Vestimenta: Formal (tonos azul y dorado)\n${extra}\nPor favor confirma tu asistencia en el siguiente enlace:\n${buildLink(name)}\n\nEsperamos contar con tu presencia en esta noche tan especial.\n\nCon cariño,\nLa familia de ${QUINCE_NAME}`;
+}
+
+function buildLink(name) {
+  return `${BASE_URL}?nombre=${encodeURIComponent(name)}#confirmar`;
+}
+
+/* ══════ PREVIEWS ══════ */
+function updatePreviews() {
+  const n = getName(), c = getCustom();
+  document.getElementById('preview-wa').textContent = buildWhatsApp(n, c);
+  document.getElementById('preview-email-subj').textContent = buildEmailSubj(n);
+  document.getElementById('preview-email-body').textContent = buildEmailBody(n, c);
+}
+
+function updateUrl() {
+  const n = document.getElementById('inv-name').value.trim() || '';
+  const url = n ? buildLink(n.split(' ')[0]) : '— Ingresa un nombre primero —';
+  document.getElementById('url-text').textContent = url;
+}
+
+document.getElementById('inv-name').addEventListener('input', () => {
+  updatePreviews(); updateUrl();
+});
+document.getElementById('inv-custom').addEventListener('input', updatePreviews);
+
+/* ══════ COPY URL ══════ */
+function copyUrl(el) {
+  const url = document.getElementById('url-text').textContent;
+  if (!url || url.startsWith('—')) return;
+  navigator.clipboard.writeText(url).then(() => {
+    const tip = el.querySelector('.copy-tip');
+    if (tip) { tip.textContent = '✓ Copiado'; setTimeout(() => tip.textContent = 'Copiar', 1500); }
+  });
+}
+
+/* ══════ ADD GUEST ══════ */
+function addGuest() {
+  const name  = document.getElementById('inv-name').value.trim();
+  const phone = document.getElementById('inv-phone').value.trim();
+  const email = document.getElementById('inv-email').value.trim();
+  const rel   = document.getElementById('inv-relation').value;
+  const msg   = document.getElementById('inv-custom').value.trim();
+
+  if (!name) { alert('Escribe el nombre del invitado.'); return; }
+
+  const guest = { id: Date.now(), name, phone, email, relation: rel, custom: msg, status: 'pending' };
+  guests.push(guest);
+  saveGuests();
+  renderGuests();
+  updateStats();
+
+  /* Reset fields */
+  ['inv-name','inv-phone','inv-email','inv-custom'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('inv-relation').value = '';
+}
+
+/* ══════ RENDER GUESTS ══════ */
+function renderGuests() {
+  const list = document.getElementById('guest-list');
+  if (!guests.length) { list.innerHTML = '<p class="empty">Aún no hay invitados. Agrega el primero →</p>'; return; }
+
+  list.innerHTML = guests.map((g, i) => `
+    <div class="guest-row">
+      <span class="name">${g.name}</span>
+      <span class="contact">${g.phone || '—'}</span>
+      <span class="contact">${g.email || '—'}</span>
+      <span class="status status--${g.status}">${g.status === 'pending' ? 'Pendiente' : g.status === 'sent' ? 'Enviada' : 'Confirmado'}</span>
+      <div style="display:flex;gap:0.3rem;">
+        ${g.phone ? `<button class="btn btn--sm btn--wa" title="WhatsApp" onclick="sendWA(${i})">📲</button>` : ''}
+        ${g.email ? `<button class="btn btn--sm btn--email" title="Email" onclick="sendEmail(${i})">📧</button>` : ''}
+        <button class="btn btn--sm" style="border:1px solid rgba(255,100,100,0.3);color:#F87171;" onclick="removeGuest(${i})" title="Eliminar">✕</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ══════ SEND VIA WHATSAPP ══════ */
+function sendWA(i) {
+  const g = guests[i];
+  if (!g.phone) return;
+  const phone = g.phone.replace(/\D/g,'');
+  const msg   = buildWhatsApp(g.name.split(' ')[0], g.custom);
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+  guests[i].status = 'sent';
+  saveGuests(); renderGuests(); updateStats();
+}
+
+function sendAllWhatsApp() {
+  guests.filter(g => g.phone && g.status === 'pending').forEach((_, i) => {
+    setTimeout(() => sendWA(guests.indexOf(guests.filter(g => g.phone && g.status === 'pending')[i])), i * 800);
+  });
+}
+
+/* ══════ SEND VIA EMAIL ══════ */
+function sendEmail(i) {
+  const g    = guests[i];
+  if (!g.email) return;
+  const firstName = g.name.split(' ')[0];
+  const subj = buildEmailSubj(firstName);
+  const body = buildEmailBody(firstName, g.custom);
+  window.open(`mailto:${g.email}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`, '_blank');
+  guests[i].status = 'sent';
+  saveGuests(); renderGuests(); updateStats();
+}
+
+/* ══════ REMOVE ══════ */
+function removeGuest(i) {
+  if (!confirm(`¿Eliminar a ${guests[i].name}?`)) return;
+  guests.splice(i, 1);
+  saveGuests(); renderGuests(); updateStats();
+}
+
+/* ══════ STATS ══════ */
+function updateStats() {
+  document.getElementById('stat-guests').textContent    = guests.length;
+  document.getElementById('stat-sent').textContent      = guests.filter(g => g.status !== 'pending').length;
+  const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
+  document.getElementById('stat-confirmed').textContent = rsvps.length;
+  const total = rsvps.reduce((sum, r) => sum + (parseInt(r.asistentes) || 1), 0);
+  document.getElementById('stat-total').textContent     = total;
+}
+
+/* ══════ RSVP LIST ══════ */
+function loadRSVPs() {
+  const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
+  const list  = document.getElementById('rsvp-list');
+  if (!rsvps.length) { list.innerHTML = '<p class="empty">Aún no hay confirmaciones.</p>'; return; }
+
+  list.innerHTML = rsvps.map(r => `
+    <div class="rsvp-entry">
+      <div class="rsvp-entry__name">${r.nombre} <span class="rsvp-entry__badge">${r.asistentes} persona${r.asistentes !== '1' ? 's' : ''}</span></div>
+      <div class="rsvp-entry__detail">
+        📱 ${r.telefono || '—'}&nbsp;&nbsp;|&nbsp;&nbsp;✉ ${r.email || '—'}
+        ${r.mensaje ? `<br>💬 "${r.mensaje}"` : ''}
+        <br><small style="opacity:0.5;">${new Date(r.timestamp).toLocaleString('es-CO')}</small>
+      </div>
+    </div>
+  `).reverse().join('');
+  updateStats();
+}
+
+/* ══════ EXPORT CSV ══════ */
+function exportList() {
+  const rows = [['Nombre','Teléfono','Email','Relación','Estado']].concat(
+    guests.map(g => [g.name, g.phone, g.email, g.relation, g.status])
+  );
+  downloadCSV(rows, 'invitados.csv');
+}
+
+function exportRSVPs() {
+  const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
+  const rows  = [['Nombre','Teléfono','Email','Asistentes','Mensaje','Fecha']].concat(
+    rsvps.map(r => [r.nombre, r.telefono, r.email, r.asistentes, r.mensaje, r.timestamp])
+  );
+  downloadCSV(rows, 'confirmaciones.csv');
+}
+
+function downloadCSV(rows, filename) {
+  const csv = rows.map(r => r.map(v => `"${(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a   = Object.assign(document.createElement('a'), {
+    href: URL.createObjectURL(new Blob(['\ufeff'+csv], {type:'text/csv'})),
+    download: filename,
+  });
+  a.click();
+}
+
+/* ══════ PERSIST ══════ */
+function saveGuests() { localStorage.setItem('admin_guests', JSON.stringify(guests)); }
+
+/* ══════ INIT ══════ */
+renderGuests();
+loadRSVPs();
+updateStats();
+updatePreviews();
+</script>
+</body>
+</html>
