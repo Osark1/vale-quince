@@ -10,42 +10,42 @@
  */
 const photos = [
   {
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80",
-    caption: "Sofía — 2024",
+    src: "{css,js,images}/valeimg1.png",
+    caption: "Abgie — 2024",
     alt: "Sofía sonriendo"
   },
   {
-    src: "https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&q=80",
+    src: "{css,js,images}/valeimg1.png",
     caption: "Familia unida",
     alt: "Foto familiar"
   },
   {
-    src: "https://images.unsplash.com/photo-1519340333755-56e9c1d04579?w=800&q=80",
+    src: "{css,js,images}/valeimg1.png",
     caption: "Recuerdos",
     alt: "Flores azules"
   },
   {
-    src: "https://images.unsplash.com/photo-1533777419517-3e3b17b95285?w=800&q=80",
+    src: "{css,js,images}/valeimg1.png",
     caption: "Cumpleaños 10",
     alt: "Pastel de cumpleaños"
   },
   {
-    src: "https://images.unsplash.com/photo-1515372261803-71e74e41f41b?w=800&q=80",
+    src: "{css,js,images}/valeimg1.png",
     caption: "Siempre sonriendo",
     alt: "Sofía de perfil"
   },
   {
-    src: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80",
+    src: "{css,js,images}/valeimg1.png",
     caption: "La gran noche se acerca",
     alt: "Decoración elegante"
   },
   {
-    src: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80",
+    src: "{css,js,images}/valeimg1.png",
     caption: "Momentos especiales",
     alt: "Luces bokeh"
   },
   {
-    src: "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&q=80",
+    src: "{css,js,images}/valeimg1.png",
     caption: "Celebración",
     alt: "Celebración"
   }
