@@ -1,5 +1,5 @@
 /**
- * app.js — XV Años Sofía Valentina
+ * app.js — XV Años  Valentina
  * Módulos: Countdown · Lightbox · RSVP form · Scroll reveal
  *
  * ══════════════════════════════════════════
@@ -20,7 +20,7 @@ const CONFIG = {
      Crea un formulario gratuito en https://formspree.io
      y pega aquí el action URL, ej: 'https://formspree.io/f/xkgnbbll'
      Déjalo vacío '' si usas Google Sheets */
-  formspreeUrl: 'https://formspree.io/f/XXXXXXXX',
+  formspreeUrl: 'https://formspree.io/f/mojodnwg',
 };
 
 /* ══════════════════════════════════════════
